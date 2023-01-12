@@ -1,0 +1,19 @@
+const stripe = require('stripe')('your_secret_key');
+
+async function processPayment(token, amount) {
+    try {
+        const charge = await stripe.charges.create({
+            amount: amount * 100, // stripe uses cents
+            currency: 'usd',
+            description: 'Automatic payment',
+            source: token
+        });
+        console.log('Payment successful: ', charge);
+    } catch (error) {
+        console.error('Error processing payment: ', error);
+    }
+}
+
+//You can call this function to process a payment, passing in a payment token (e.g. from a Stripe.js form) and the amount to charge:
+
+processPayment(token, 19.99);
