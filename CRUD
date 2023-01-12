@@ -1,0 +1,42 @@
+class Kangtoto {
+    constructor() {
+        this.games = [];
+    }
+
+    create(game) {
+        this.games.push(game);
+    }
+
+    read() {
+        return this.games;
+    }
+
+    update(gameId, newGame) {
+        for (let i = 0; i < this.games.length; i++) {
+            if (this.games[i].id === gameId) {
+                this.games[i] = newGame;
+                return;
+            }
+        }
+    }
+
+    delete(gameId) {
+        this.games = this.games.filter(game => game.id !== gameId);
+    }
+}
+
+//Instances:
+
+const kangtoto = new Kangtoto();
+
+// create a new game
+kangtoto.create({ id: 1, name: "Super Mario Bros." });
+
+// read all games
+console.log(kangtoto.read());
+
+// update a game
+kangtoto.update(1, { id: 1, name: "Mario Kart" });
+
+// delete a game
+kangtoto.delete(1);
